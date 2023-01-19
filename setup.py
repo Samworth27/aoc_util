@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as readme:
 
 setuptools.setup(
     name='aoc_util',
-    version='0.0.1',
+    version='0.0.2',
     author='Sam Mitchell',
     author_email='sam@xxvii.dev',
     description='Common modules used during Advent of Code',
@@ -17,5 +17,5 @@ setuptools.setup(
     },
     license='MIT',
     packages=['aoc_util'],
-    install_requires=['numpy', 'pygame']
+    install_requires=['numpy', 'pygame', 'pillow']
 )
