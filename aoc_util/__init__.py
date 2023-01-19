@@ -1,1 +1,1 @@
-from modules import *
+from .modules import graph, grid, colour_range,heap,inputs,vector,windows
