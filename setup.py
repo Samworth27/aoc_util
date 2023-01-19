@@ -17,5 +17,5 @@ setuptools.setup(
     },
     license='MIT',
     packages=['aoc_util'],
-    install_requires=['numpy', 'pygame', 'PIL']
+    install_requires=['numpy', 'pygame']
 )
