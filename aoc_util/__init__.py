@@ -1,1 +1,2 @@
-from .modules import graph, grid, colour_range,heap,inputs,vector,windows
+from .graph import tsp_graph, graph, graph_vis
+from .grid import grid, visualise_grid
