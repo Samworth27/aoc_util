@@ -98,7 +98,7 @@ def visualise_graph(graph, vis_config=default_config(), max_iterations = 1000, f
             pygame.draw.line(screen, (50, 50, 50),
                              node1.position.tuple, node2.position.tuple, 1)
         
-        draw_func(graph,screen)
+        draw_func(graph,screen, window_size)
         
             
         for node in graph.nodes:
