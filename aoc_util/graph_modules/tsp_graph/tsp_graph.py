@@ -1,7 +1,7 @@
 from ..graph import Graph, Path
 from random import choice, choices, randint, random
 
-def build_short_edges_first(nodes, edges):
+def build_short_edges_first(nodes, edges, loop = False):
     sorted_edges = sorted(edges, key=lambda x: x.weight)
     remaining_nodes = set(nodes)
     node1, node2 = sorted_edges.pop(0).nodes
@@ -30,13 +30,19 @@ def build_short_edges_first(nodes, edges):
                         new_path.append(node1)
                         remaining_nodes -= {node1}
             else:
+                if len(remaining_nodes) == 0:
+                    break
                 node = choice([*remaining_nodes])
                 new_path.append(node)
                 remaining_nodes -= {node}
         else:
+            if len(remaining_nodes) == 0:
+                    break
             node = choice([*remaining_nodes])
             new_path.append(node)
             remaining_nodes -= {node}
+    if loop:
+        new_path.append(new_path[0])
     return new_path
 
 
@@ -50,8 +56,9 @@ class TSPGraph(Graph):
 
 
 class GeneticTSPGraph(TSPGraph):
-    def __init__(self, nodes, edges, generation_size, start_generation:list[Path]):
+    def __init__(self, nodes, edges, generation_size, start_generation:list[Path], full_loop = False):
         super().__init__(nodes, edges)
+        self.full_loop = full_loop
         self.generation_size = generation_size
         self.current_generation = [*start_generation]
         self.best = self.best_in_generation()
@@ -64,7 +71,8 @@ class GeneticTSPGraph(TSPGraph):
         fitness_weights = self._fitness_weights()
         for i in range(self.generation_size-1):
             parent1, parent2 = choices(self.current_generation,fitness_weights,k=2)
-            new_generation.append(self.mutate(self.cross_over(parent1,parent2)))
+            new_path = self.mutate(self.cross_over(parent1,parent2))
+            new_generation.append(new_path)
         self.current_generation = new_generation
         if self._fitness(self.best_in_generation()) < self._fitness(self.best):
             self.best = self.best_in_generation()
@@ -80,8 +88,10 @@ class GeneticTSPGraph(TSPGraph):
     def _max_fitness(self):
         return max(self._fitness(x) for x in self.current_generation)
     
-    def mutate(self,path):
+    def mutate(self,path:Path):
         new_path = path.copy()
+        if self.full_loop:
+            new_path.nodes.pop()
         times = randint(0,5)
         for i in range(times):
             if random() < 0.25:
@@ -89,6 +99,8 @@ class GeneticTSPGraph(TSPGraph):
                 new_path.nodes[index1],new_path.nodes[index2] = new_path.nodes[index2], new_path.nodes[index1]
             else:
                 new_path.nodes.append(new_path.nodes.pop(0))
+        if self.full_loop:
+            new_path.nodes.append(new_path.nodes[0])
         return new_path
 
     def cross_over(self, parent1: Path, parent2: Path):
@@ -96,4 +108,4 @@ class GeneticTSPGraph(TSPGraph):
             *self.edges_from_path(parent1), *self.edges_from_path(parent2)]
         colour = tuple((a+b)/2 for a,b in zip(parent1.colour,parent2.colour))
         line_width = (parent1.line_width + parent2.line_width)//2
-        return Path(build_short_edges_first(parent1.nodes, all_edges),colour,line_width)
+        return Path(build_short_edges_first(self.nodes, all_edges, self.full_loop),colour,line_width)

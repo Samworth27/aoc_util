@@ -28,9 +28,11 @@ def default_mouse2_function(graph,screen,screen_size):
 def default_config():
     return copy(_default_config)
 
-def random_path(nodes, colour, line_width):
+def random_path(nodes, colour, line_width, loop=False):
     random_nodes = [*nodes]
     shuffle(random_nodes)
+    if loop:
+        random_nodes.append(random_nodes[0])
     return Path(random_nodes,colour,line_width)
 
 def random_position(width, height, node_size):

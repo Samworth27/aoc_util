@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as readme:
 
 setuptools.setup(
     name='aoc_util',
-    version='0.0.29',
+    version='0.0.30',
     author='Sam Mitchell',
     author_email='sam@xxvii.dev',
     description='Common modules used during Advent of Code',
