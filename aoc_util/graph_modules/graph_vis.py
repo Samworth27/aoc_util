@@ -1,9 +1,9 @@
 import pygame
-from modules.vector import Vector
+from aoc_util.vector import Vector
 from copy import copy
 from random import randint, choice, shuffle
-from modules.graph import Node, Edge, Path
-from modules.windows import sliding_window
+from .graph import Node, Edge, Path
+from aoc_util.windows import sliding_window
 
 
 

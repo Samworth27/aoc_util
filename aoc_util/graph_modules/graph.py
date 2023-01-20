@@ -1,5 +1,5 @@
-from modules.vector import Vector
-from modules.windows import sliding_window
+from aoc_util.vector import Vector
+from aoc_util.windows import sliding_window
 
 def make_key(node1, node2):
     return tuple(sorted([node1.name, node2.name]))

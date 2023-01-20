@@ -1,6 +1,6 @@
 from collections import namedtuple
 from enum import Enum
-from modules.vector import Vector
+from aoc_util.vector import Vector
 
 Bounds = namedtuple('Bounds', ['x_min', 'x_max', 'y_min', 'y_max'])
 

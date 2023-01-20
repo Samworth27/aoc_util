@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as readme:
 
 setuptools.setup(
     name='aoc_util',
-    version='0.0.4',
+    version='0.0.26',
     author='Sam Mitchell',
     author_email='sam@xxvii.dev',
     description='Common modules used during Advent of Code',
@@ -16,6 +16,6 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/Samworth27/aoc_util/issues"
     },
     license='MIT',
-    packages=['aoc_util'],
+    packages=['aoc_util', 'aoc_util.grid_modules', 'aoc_util.graph_modules','aoc_util.graph_modules.tsp_graph'],
     install_requires=['numpy', 'pygame', 'pillow']
 )
