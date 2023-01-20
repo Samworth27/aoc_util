@@ -45,6 +45,9 @@ def get_data(source:tuple[int,int]|str):
         case str(source):
             data = list(read_file(source))
             
+        case _:
+            raise TypeError("Valid input not given")
+            
     return data
 
 def read_file(test_case='example') -> Generator[str]:
