@@ -1,11 +1,9 @@
 import pygame
-from aoc_util.vector import Vector
+from ..vector import Vector
+from ..windows import sliding_window
 from copy import copy
 from random import randint, choice, shuffle
 from .graph import Node, Edge, Path
-from aoc_util.windows import sliding_window
-
-
 
 
 def default_step_function(graph, window_size):
